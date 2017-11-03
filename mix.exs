@@ -20,7 +20,7 @@ defmodule ChatPhoenix.Mixfile do
   def application do
     [
       mod: {ChatPhoenix, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger, :comeonin]
     ]
   end
 
@@ -40,6 +40,7 @@ defmodule ChatPhoenix.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
+      {:comeonin, "~> 1.2"},
       {:cowboy, "~> 1.0"}
     ]
   end
