@@ -1,20 +1,34 @@
-# ChatPhoenix
+# Elixir+PhoenixによるWebアプリの作例(5)
 
-To start your Phoenix app:
+## 概要
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `npm install`
-  * Start Phoenix endpoint with `mix phoenix.server`
+- Phoenixによるログイン・ログアウト及びチャット機能の作例です。
+- 現時点ではログイン・ログアウト機能のみが実装されています。
+- チャット機能については期日実装する予定です。
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+## 動作環境(バージョン)
 
-## Learn more
+- 環境構築の作業手順は[blog](https://github.com/ht0919/blog)を参照して下さい。
+  - macOS: 10.13
+  - PostgreSQL: 9.6.5
+  - Node.js: 8.7.0
+  - Elixir: 1.5.2
+  - Phoenix: 1.3.0
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+
+## 起動方法
+
+- git clone https://github.com/ht0919/phoenix_chat
+- cd phoenix_chat
+- mix deps.get
+- npm install
+- mix ecto.create
+- mix ecto.migrate
+- mix phoenix.server
+
+
+## 各機能のURL
+
+- ユーザー登録 → [http://localhost:4000/register](http://localhost:4000/register)
+- ログイン → [http://localhost:4000/login](http://localhost:4000/login)
