@@ -1,3 +1,4 @@
+<!-- web/templates/layout/app.html.eex -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,8 +17,13 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-            <li><%= link "ユーザ登録", to: registration_path(@conn, :new) %></li>
+            <%= if logged_in?(@conn) do %>
+              <li><%= link "ログアウト", to: session_path(@conn, :delete), method: :delete %></li>
+            <% else %>
+              <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+              <li><%= link "ユーザ登録", to: registration_path(@conn, :new) %></li>
+              <li><%= link "ログイン", to: session_path(@conn, :new) %></li>
+            <% end %>
           </ul>
         </nav>
         <span class="logo"></span>
