@@ -1,0 +1,4 @@
+<!-- web/templates/hello/index.html.eex -->
+<div class="jumbotron">
+  <h2>Hello Phoenix!!</h2>
+</div>
