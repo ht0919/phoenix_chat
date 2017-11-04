@@ -3,8 +3,7 @@
 ## 概要
 
 - Phoenixによるログイン・ログアウト及びチャット機能の作例です。
-- 現時点ではログイン・ログアウト機能のみが実装されています。
-- チャット機能については期日実装する予定です。
+- 基本的に『[Phoenix入門1 - Hello Phoenix](http://ruby-rails.hatenadiary.com/entry/20151011/1444560106)』の手順に従って作成しました。作者の方に感謝です。
 
 
 ## 動作環境(バージョン)
@@ -26,6 +25,11 @@
 - mix ecto.create
 - mix ecto.migrate
 - mix phoenix.server
+
+
+## 実行時のイメージ
+
+![img01.png](https://raw.githubusercontent.com/ht0919/phoenix_chat/master/images/img01.png)
 
 
 ## 各機能のURL
