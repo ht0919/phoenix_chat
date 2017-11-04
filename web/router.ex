@@ -16,6 +16,14 @@ defmodule ChatPhoenix.Router do
     plug :accepts, ["json"]
   end
 
+  # Other scopes may use custom stacks.
+  scope "/api", ChatPhoenix do
+    pipe_through :api
+
+    # メッセージ一覧取得(:index)
+    get "/messages", MessageController, :index
+  end
+
   scope "/", ChatPhoenix do
     pipe_through :browser # Use the default browser stack
 

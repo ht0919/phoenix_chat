@@ -13,7 +13,7 @@ defmodule ChatPhoenix.Message do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:content])
+    |> cast(params, [:content, :user_id])
     |> validate_required([:content])
   end
 end

@@ -58,7 +58,7 @@ class MySocket {
       .receive("error", resp => { // チャネルに入れなかったときの処理
         console.log("Unable to join", resp)
       })
-/****
+
       // キー入力イベントの登録
       this.$message.off("keypress").on("keypress", e => {
         if (e.keyCode === 13) { // 13: Enterキー
@@ -73,7 +73,7 @@ class MySocket {
 
       // チャネルの"new:message"イベントを受け取ったときのイベント処理
       this.channel.on("new:message", message => this._renderMessage(message) )
-****/
+
   }
 
   // メッセージを画面に表示
@@ -88,6 +88,20 @@ class MySocket {
   _sanitize(str) {
     return $("<div/>").text(str).html()
   }
+
+  // メッセージを取得
+  all() {
+    $.ajax({
+      url: "/api/messages"
+    }).done((data) => {
+      console.log(data)
+      // 取得したデータをレンダーする
+      data.messages.forEach((message) => this._renderMessage(message))
+    }).fall((data) => {
+      alert("エラーが発生しました")
+      console.log(data)
+    })
+  }
 }
 
 $(
@@ -101,6 +115,8 @@ $(
       // app.html.eexでセットしたトークンを使ってソケットに接続
       my_socket.connectSocket("/socket", window.userToken)
       my_socket.connectChannel("rooms:lobby")
+      // メッセージを取得
+      my_socket.all()
     }
   }
 )
