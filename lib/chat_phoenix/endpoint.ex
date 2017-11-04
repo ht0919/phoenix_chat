@@ -1,6 +1,9 @@
+# lib/chat_phoenix/endpoint.ex
 defmodule ChatPhoenix.Endpoint do
   use Phoenix.Endpoint, otp_app: :chat_phoenix
 
+  # ソケットハンドラ
+  # "/socket" につなぐと、ソケットハンドラ UserSocket に接続される
   socket "/socket", ChatPhoenix.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

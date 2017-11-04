@@ -1,8 +1,10 @@
+# web/channels/user_socket.ex
 defmodule ChatPhoenix.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ChatPhoenix.RoomChannel
+  # クライアントが"rooms:"で始まるトピックにメッセージを送るとRoomChannelモジュールにルートされる
+  channel "rooms:*", ChatPhoenix.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

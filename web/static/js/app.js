@@ -1,3 +1,4 @@
+// web/static/js/app.js
 // Brunch automatically concatenates all files in your
 // watched paths. Those paths can be configured at
 // config.paths.watched in "brunch-config.js".
@@ -19,3 +20,6 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+// web/static/js/my_socket.js をインポート
+import "./my_socket"
