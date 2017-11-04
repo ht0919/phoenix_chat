@@ -1,4 +1,4 @@
-// web/static/js/app.js
+// web/static/js/my_socket.js
 
 // Phoenix 1.3.0 ではデフォルトで"phoenix"に
 // JSのScoketクラスが実装されています。そのSocketクラスをimportします。
@@ -31,10 +31,17 @@ class MySocket {
   }
 
   // ソケットに接続
-  connectSocket(socket_path) {
+  // トークンを受け取り、トークンがない場合はアラートを表示
+  // new Socketで接続するときにトークンをサーバ側に送る
+  connectSocket(socket_path, token) {
+    if (!token) {
+      alert("ソケットにつなぐにはトークンが必要です")
+      return false
+    }
+
     // "lib/chat_phoenix/endpoint.ex" に定義してあるソケットパス("/socket")で
     // ソケットに接続すると、UserSocketに接続されます
-    this.socket = new Socket(socket_path)
+    this.socket = new Socket(socket_path, { params: { token: token } })
     this.socket.connect()
     this.socket.onClose( e => console.log("Closed connection"))
   }
@@ -45,11 +52,13 @@ class MySocket {
     this.channel.join()
       .receive("ok", resp => {  // チャネルに入れたときの処理
         console.log("Joined successfully", resp)
+        // Username入力フィールドにユーザのemailを自動的にセットする
+        this.$username.val(resp.email)
       })
       .receive("error", resp => { // チャネルに入れなかったときの処理
         console.log("Unable to join", resp)
       })
-
+/****
       // キー入力イベントの登録
       this.$message.off("keypress").on("keypress", e => {
         if (e.keyCode === 13) { // 13: Enterキー
@@ -64,6 +73,7 @@ class MySocket {
 
       // チャネルの"new:message"イベントを受け取ったときのイベント処理
       this.channel.on("new:message", message => this._renderMessage(message) )
+****/
   }
 
   // メッセージを画面に表示
@@ -82,9 +92,17 @@ class MySocket {
 
 $(
   () => {
-    // ソケット/チャネルに接続
-    let my_socket = new MySocket()
-    my_socket.connectSocket("/socket")
-    my_socket.connectChannel("rooms:lobby")
+    // userTokenがある場合にのみソケットをつなぐ
+    // 本来は、app.html.eexでこのJSを読み込まなくする方が良さそう
+    // そのためにはJSを分割し、PageControllerのindexアクションで読み込むように
+    // render_existingを行う必要がある
+    if (window.userToken) {
+      let my_socket = new MySocket()
+      // app.html.eexでセットしたトークンを使ってソケットに接続
+      my_socket.connectSocket("/socket", window.userToken)
+      my_socket.connectChannel("rooms:lobby")
+    }
   }
 )
+
+export default MySocket

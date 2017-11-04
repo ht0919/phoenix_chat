@@ -1,3 +1,4 @@
+# web/web.ex
 defmodule ChatPhoenix.Web do
   @moduledoc """
   The entrypoint for defining your web interface, such
@@ -37,6 +38,9 @@ defmodule ChatPhoenix.Web do
 
       import ChatPhoenix.Router.Helpers
       import ChatPhoenix.Gettext
+
+      # Sessionモジュールのcurrent_userとlogged_in?をWebのcontrollerに追加
+      import ChatPhoenix.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 
@@ -62,6 +66,9 @@ defmodule ChatPhoenix.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      # Sessionモジュールのcurrent_userとlogged_in?をWevのviewに追加
+      import ChatPhoenix.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 
