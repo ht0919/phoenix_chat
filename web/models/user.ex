@@ -8,6 +8,7 @@ defmodule ChatPhoenix.User do
     # passwordフィールドを追加。virtual: trueとすることでデータベースには保存されない
     field :password, :string, virtual: true
 
+    has_many :messages, ChatPhoenix.Message
     timestamps()
   end
 
